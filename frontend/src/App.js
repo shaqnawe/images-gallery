@@ -7,8 +7,8 @@ const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY;
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [images, setImage] = useState([]);
-  
+  const [images, setImages] = useState([]);
+  console.log(images);
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     fetch(
@@ -16,7 +16,7 @@ const App = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        setImages([data, ...images]);
       })
       .catch((err) => console.log(err));
     setSearchTerm("");

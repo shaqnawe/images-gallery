@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Row, Col } from "react-bootstrap";
 import Header from "./components/Header";
 import Search from "./components/Search";
 import ImageCard from "./components/ImageCard";
-import { Container, Row, Col } from "react-bootstrap";
+import Welcome from "./components/Welcome";
 
 const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY;
 
@@ -35,14 +36,17 @@ const App = () => {
         handleSubmit={handleSearchSubmit}
       />
       <Container className="mt-4">
-        <Row xs={1} md={2} lg={3}>
-          {!!images.length &&
-            images.map((image) => (
+        {images.length ? (
+          <Row xs={1} md={2} lg={3}>
+            {images.map((image) => (
               <Col key={image.id} className="pb-3">
                 <ImageCard deleteHandler={deleteImageHandler} image={image} />
               </Col>
             ))}
-        </Row>
+          </Row>
+        ) : (
+          <Welcome />
+        )}
       </Container>
     </div>
   );
